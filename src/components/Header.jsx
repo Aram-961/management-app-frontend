@@ -1,18 +1,16 @@
 import logo from "../assets/logo.png";
 
-const Header = () => {
+export default function Header() {
   return (
-    <nav className='mb-4 p-0 bg-blend-lighten'>
+    <nav className='navbar bg-dark mb-4 p-0'>
       <div className='container'>
-        <a href='/' className='navbar-brand'>
-          <div className='flex'>
-            <img src={logo} alt='' />
-            <h1>Project Management</h1>
+        <a className='navbar-brand' href='/'>
+          <div className='d-flex'>
+            <img src={logo} alt='logo' className='mr-2' />
+            <div className='text-white'>Project Management</div>
           </div>
         </a>
       </div>
     </nav>
   );
-};
-
-export default Header;
+}

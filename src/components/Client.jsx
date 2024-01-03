@@ -10,7 +10,7 @@ const Client = () => {
   return (
     <>
       {!loading && !error && (
-        <table className='table-auto table  mt-3'>
+        <table className='table mt-3'>
           <thead>
             <tr>
               <th>Name</th>
