@@ -9,7 +9,7 @@ const DELETE_CLIENT = gql`
 `;
 
 const ADD_CLIENT = gql`
-  mutation addClient($name: String, $email: String, $phone: String) {
+  mutation addClient($name: String!, $email: String!, $phone: String!) {
     addClient(name: $name, email: $email, phone: $phone) {
       id
       name

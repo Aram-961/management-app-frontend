@@ -13,11 +13,30 @@ const AddClientModal = () => {
 
   const [addClient] = useMutation(ADD_CLIENT, {
     variables: { name, email, phone },
+    update(cache, { data: { addClient } }) {
+      const { clients } = cache.readQuery({ query: GET_CLIENTS });
+      cache.writeQuery({
+        query: GET_CLIENTS,
+        data: { clients: [...clients, addClient] },
+      });
+    },
   });
+
+  console.log(addClient);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(name, email, phone);
+    // validate client
+    if (name === "" || email === "" || phone === "") {
+      alert("Please fill in all fields");
+    }
+
+    addClient(name, email, phone);
+
+    // clearing form
+    setName("");
+    setEmail("");
+    setPhone("");
   };
   return (
     <>
@@ -70,7 +89,7 @@ const AddClientModal = () => {
                   <input
                     type='email'
                     className='form-control'
-                    id='name'
+                    id='email'
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
@@ -84,7 +103,7 @@ const AddClientModal = () => {
                   <input
                     type='tel'
                     className='form-control'
-                    id='name'
+                    id='phone'
                     value={phone}
                     onChange={(e) => {
                       setPhone(e.target.value);
