@@ -28,7 +28,7 @@ const AddClientModal = () => {
     e.preventDefault();
     // validate client
     if (name === "" || email === "" || phone === "") {
-      alert("Please fill in all fields");
+      alert("Please fill all fields");
     }
 
     addClient(name, email, phone);

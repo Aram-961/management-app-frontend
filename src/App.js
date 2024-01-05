@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import Client from "./components/Client";
+import Project from "./components/Project";
 import AddClientModal from "./components/AddClientModal";
 
 // This code creates an Apollo cache with a custom type policy for the Query type.
@@ -39,6 +40,7 @@ function App() {
         <Header />
         <div className='container'>
           <AddClientModal />
+          <Project />
           <Client />
         </div>
       </ApolloProvider>
