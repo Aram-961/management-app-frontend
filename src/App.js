@@ -1,8 +1,9 @@
 import Header from "./components/Header";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
-import Client from "./components/Client";
-import Project from "./components/Project";
-import AddClientModal from "./components/AddClientModal";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import Project from "./pages/Project.jsx";
 
 // This code creates an Apollo cache with a custom type policy for the Query type.
 const cache = new InMemoryCache({
@@ -37,12 +38,16 @@ function App() {
   return (
     <>
       <ApolloProvider client={client}>
-        <Header />
-        <div className='container'>
-          <AddClientModal />
-          <Project />
-          <Client />
-        </div>
+        <Router>
+          <Header />
+          <div className='container'>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='/project/:id' element={<Project />} />
+              <Route path='*' element={<NotFound />} />
+            </Routes>
+          </div>
+        </Router>
       </ApolloProvider>
     </>
   );
