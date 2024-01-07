@@ -7,6 +7,8 @@ const Client = () => {
   if (loading) return <p>lOaDiNg... </p>;
   if (error) return <p>something went wrong... </p>;
 
+  console.log("data here:", data);
+
   return (
     <>
       {!loading && !error && (

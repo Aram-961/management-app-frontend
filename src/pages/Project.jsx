@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_PROJECT } from "../queries/projectQuery";
+import ClientInfo from "../components/ClientInfo";
 
 const Project = () => {
   // destructuring
@@ -18,6 +19,17 @@ const Project = () => {
           <Link to='/' className='btn btn-light btn-sm w-25 d-inline ms-auto'>
             back
           </Link>
+
+          <h1>{data.project.name}</h1>
+          <p>{data.project.name}</p>
+          <h5 className='mt-3'>Project Status:</h5>
+          <p className='lead'>
+            {data?.project.status === "completed"
+              ? "Completed ✔️"
+              : data.project.status}
+          </p>
+
+          <ClientInfo client={data.project.client} />
         </div>
       )}
     </>
