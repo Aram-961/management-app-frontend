@@ -1,66 +1,56 @@
 import { useState } from "react";
-import { CiUser } from "react-icons/ci";
-import { useMutation } from "@apollo/client";
+import { CiBoxList } from "react-icons/ci";
+import { useMutation, useQuery } from "@apollo/client";
 import { DELETE_CLIENT } from "../mutations/clientMutation.js";
-import { ADD_CLIENT } from "../mutations/clientMutation.js";
 
-import { GET_CLIENTS } from "../queries/clientQuery.js";
+import { GET_PROJECTS } from "../queries/projectQuery.js";
 
-const AddClientModal = () => {
+const AddProject = () => {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [description, setDescription] = useState("");
+    const [status, setStatus] = useState("new");
+    const [clientId, setClientId] = useState("")
 
-  const [addClient] = useMutation(ADD_CLIENT, {
-    variables: { name, email, phone },
-    update(cache, { data: { addClient } }) {
-      const { clients } = cache.readQuery({ query: GET_CLIENTS });
-      cache.writeQuery({
-        query: GET_CLIENTS,
-        data: { clients: [...clients, addClient] },
-      });
-    },
-  });
-
-  console.log(addClient);
+//   console.log(addClient);
 
   const onSubmit = (e) => {
     e.preventDefault();
     // validate client
-    if (name === "" || email === "" || phone === "") {
+    if (name === "" || description === "" || status === "") {
       alert("Please fill all fields");
     }
 
-    addClient(name, email, phone);
+    // addClient(name, description, status);
 
     // clearing form
     setName("");
-    setEmail("");
-    setPhone("");
+    setDescription("");
+    setStatus("new");
+    setClientId("");
   };
   return (
     <>
       <button
         type='button'
-        className='btn btn-primary'
+        className='btn btn-secondary'
         data-bs-toggle='modal'
-        data-bs-target='#addClientModal'>
+        data-bs-target='#addProject'>
         <div className='d-flex align-items-center'>
-          <CiUser className='icon' />
-          <div>Add New Client</div>
+          <CiBoxList className='icon' />
+          <div>Add New Project</div>
         </div>
       </button>
 
       <div
         className='modal fade'
-        id='addClientModal'
-        aria-labelledby='addClientModal'
+        id='addProject'
+        aria-labelledby='addProject'
         aria-hidden='true'>
         <div className='modal-dialog'>
           <div className='modal-content'>
             <div className='modal-header'>
               <h1 className='modal-title fs-5' id='exampleModalLabel'>
-                Add Client
+                Add your new project
               </h1>
               <button
                 type='button'
@@ -85,34 +75,36 @@ const AddClientModal = () => {
                 </div>
                 {/* Email */}
                 <div className='mb-3'>
-                  <label className='form-label'>Email</label>
-                  <input
-                    type='email'
+                  <label className='form-label'>Description</label>
+                  <textarea
                     className='form-control'
-                    id='email'
-                    value={email}
+                    id='description'
+                    value={description}
                     onChange={(e) => {
-                      setEmail(e.target.value);
+                      setDescription(e.target.value);
                     }}
                   />
                 </div>
 
                 {/* Phone */}
                 <div className='mb-3'>
-                  <label className='form-label'>Phone</label>
-                  <input
-                    type='tel'
-                    className='form-control'
-                    id='phone'
-                    value={phone}
+                  <label className='form-label'>Status</label>
+                  <select
+                    id='status'
+                    className='form-select'
+                    value={status}
                     onChange={(e) => {
-                      setPhone(e.target.value);
-                    }}
-                  />
+                      setStatus(e.target.value);
+                    }}>
+                    <option value='new'>Not Started</option>
+                    <option value='in progress'>progress</option>
+                    <option value='completed'>completed</option>
+                  </select>
                 </div>
+
                 <button
                   type='submit'
-                  className='btn btn-secondary'
+                  className='btn btn-primary'
                   data-bs-dismiss='modal'>
                   Submit
                 </button>
@@ -125,4 +117,4 @@ const AddClientModal = () => {
   );
 };
 
-export default AddClientModal;
+export default AddProject;
