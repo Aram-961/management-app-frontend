@@ -18,12 +18,11 @@ const AddProject = () => {
       const { projects } = cache.readQuery({ query: GET_PROJECTS });
       cache.writeQuery({
         query: GET_PROJECTS,
-        data: { clients: [...projects, addProject] },
+        data: { projects: [...projects, addProject] },
       });
     },
   });
 
-  addProject(name, description, clientId, status);
 
   // Get clients for select
   const { loading, error, data } = useQuery(GET_CLIENTS);
@@ -34,6 +33,9 @@ const AddProject = () => {
     if (name === "" || description === "" || status === "") {
       alert("Please fill all fields");
     }
+
+
+    addProject(name, description, clientId, status);
 
     // addClient(name, description, status);
 
