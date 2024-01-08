@@ -29,4 +29,13 @@ const ADD_PROJECT = gql`
   }
 `;
 
-export { ADD_PROJECT };
+// Delete  a project based on the id
+const DELETE_PROJECT = gql`
+  mutation DeleteProject($id: ID!) {
+    deleteProject(id: $id) {
+      id
+    }
+  }
+`;
+
+export { ADD_PROJECT, DELETE_PROJECT };
