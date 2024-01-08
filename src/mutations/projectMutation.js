@@ -19,7 +19,12 @@ const ADD_PROJECT = gql`
       name
       description
       status
-      clientId
+      client {
+        id
+        name
+        email
+        phone
+      }
     }
   }
 `;

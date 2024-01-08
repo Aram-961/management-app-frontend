@@ -23,7 +23,6 @@ const AddProject = () => {
     },
   });
 
-
   // Get clients for select
   const { loading, error, data } = useQuery(GET_CLIENTS);
 
@@ -33,7 +32,6 @@ const AddProject = () => {
     if (name === "" || description === "" || status === "") {
       alert("Please fill all fields");
     }
-
 
     addProject(name, description, clientId, status);
 
@@ -95,7 +93,7 @@ const AddProject = () => {
                         }}
                       />
                     </div>
-                    {/* Email */}
+                    {/* description */}
                     <div className='mb-3'>
                       <label className='form-label'>Description</label>
                       <textarea
@@ -108,7 +106,7 @@ const AddProject = () => {
                       />
                     </div>
 
-                    {/* Phone */}
+                    {/* status */}
                     <div className='mb-3'>
                       <label className='form-label'>Status</label>
                       <select
@@ -118,7 +116,7 @@ const AddProject = () => {
                         onChange={(e) => {
                           setStatus(e.target.value);
                         }}>
-                        <option value='new'>Not Started</option>
+                        <option value='active'>active</option>
                         <option value='in progress'>progress</option>
                         <option value='completed'>completed</option>
                       </select>
