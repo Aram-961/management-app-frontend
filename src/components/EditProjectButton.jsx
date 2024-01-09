@@ -67,7 +67,7 @@ const EditProjectButton = ({ project }) => {
               setStatus(e.target.value);
             }}>
             <option value='active'>active</option>
-            <option value='in progress'>progress</option>
+            <option value=' progress'>progress</option>
             <option value='completed'>completed</option>
           </select>
         </div>

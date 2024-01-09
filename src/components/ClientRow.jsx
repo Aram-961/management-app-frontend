@@ -10,18 +10,6 @@ const ClientRow = ({ client }) => {
     variables: { id: client.id },
     // On Delete: Refetch client from database
     refetchQueries: [{ query: GET_CLIENTS }, { query: GET_PROJECTS }],
-
-    // updating the cache on deleteClient
-    // update: (cache, { data: { deleteClient } }) => {
-    //   const { clients } = cache.readQuery(
-    //     { query: GET_CLIENTS },
-    //     { query: GET_PROJECTS }
-    //   );
-    //   cache.writeQuery({
-    //     query: GET_CLIENTS,
-    //     data: { clients: clients.filter((c) => c.id !== deleteClient.id) },
-    //   });
-    // },
   });
   return (
     <tr>
