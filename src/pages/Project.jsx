@@ -1,8 +1,10 @@
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_PROJECT } from "../queries/projectQuery";
+
 import ClientInfo from "../components/ClientInfo";
 import DeleteProjectButton from "../components/DeleteProjectButton";
+import EditProjectButton from "../components/EditProjectButton";
 
 const Project = () => {
   // destructuring
@@ -32,7 +34,9 @@ const Project = () => {
 
           <ClientInfo client={data.project.client} />
 
-          <DeleteProjectButton projectId={data.project.delete} />
+          <EditProjectButton project={data.project} />
+
+          <DeleteProjectButton projectId={data.project.id} />
         </div>
       )}
     </>
